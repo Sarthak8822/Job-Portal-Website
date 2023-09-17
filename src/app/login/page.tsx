@@ -4,6 +4,7 @@ import axios from "axios"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { toast } from "react-hot-toast/headless"
+import Navbar from "../navbar/page"
 
 export default function LoginPage() {
     const router = useRouter()
@@ -42,6 +43,7 @@ export default function LoginPage() {
 
     return(
         <div className="flex flex-col items-center justify-center min-h-screen py-2">
+            <Navbar />
             <h1>{loading ? "Processing": "Login"}</h1>
             <hr />
             <label>
