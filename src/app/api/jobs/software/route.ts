@@ -1,4 +1,3 @@
-
 import { NextRequest, NextResponse } from "next/server"
 
 const url = 'https://jsearch.p.rapidapi.com/search?query=Software%20developer&page=1&num_pages=10';
@@ -13,7 +12,7 @@ const url1 = 'https://jooble.org/api/';
 const options1 = {
   method: 'GET',
   headers: {
-    'API-Key': '"9f259856-a563-4d25-9fe5-38f3bead7c0d"',
+    'API-Key': '9f259856-a563-4d25-9fe5-38f3bead7c0d',
   }
 };
 
