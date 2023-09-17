@@ -32,14 +32,14 @@ export default function JobsList() {
     fetchJobs();
   }, []);
 
-  const handleJob = async (jobId) => {
+  const handleJob = async(jobId) => {
     try {
       const response = await axios.get(`/api/jobs/job/${jobId}`);
-      router.push(`/jobs/${jobId}`); // Redirect to jobs page with job info of job_id
+      router.push(`/jobs/${jobId}`) // Redirect to jobs page with job info of job_id
     } catch (error) {
-      toast.error("Something went wrong");
+      toast.error("Something went wrong")
       console.error(error);
-    } finally {
+    }finally{
 
     }
   };
@@ -67,11 +67,7 @@ export default function JobsList() {
     <div className="flex flex-col items-center justify-center">
       <Navbar />
       <h1 className="text-2xl font-bold mb-5">Jobs List</h1>
-      <form onSubmit={handleFilterSubmit}>
-        <input type="text" value={filter} onChange={handleFilterChange} placeholder="Enter job filter" />
-        <button type="submit">Filter</button>
-      </form>
-      {loading ?
+            {loading ?
         <div className="flex justify-center items-center">
           <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-purple-500"></div>
         </div>
@@ -80,7 +76,7 @@ export default function JobsList() {
           {jobs.map((job, index) => (
             <Link key={index} href={job.job_apply_link} target="_blank" rel="noopener noreferrer" className="m-4 w-64 rounded overflow-hidden shadow-lg" >
               <div className="px-6 py-4">
-                {job.employer_logo && <Image src={job.employer_logo} alt="Employer Logo" />}
+                {job.employer_logo && <img src={job.employer_logo} alt="Employer Logo" />}
                 <div className="font-bold text-xl mb-2">{job.employer_name}</div>
                 <p className="text-base text-white">{job.job_title}</p>
               </div>
