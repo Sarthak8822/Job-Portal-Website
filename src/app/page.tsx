@@ -6,14 +6,13 @@ import { toast } from "react-hot-toast";
 import Navbar from './navbar/page';
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import JobDetail from "./jobPage/page";
-import Image from "next/image";
 
 export default function JobsList() {
   const router = useRouter();
   const [jobs, setJobs] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const [filter, setFilter] = React.useState('');
+  const [job, setJob] = React.useState()
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -33,23 +32,33 @@ export default function JobsList() {
     fetchJobs();
   }, []);
 
-  const handleJob = async (jobId) => {
+  // const handleJob = async (jobId) => {
+  //   try {
+  //     const response = await axios.get(`/api/jobs/job/${jobId}`);
+  //     router.push(`/jobs/${jobId}`); // Redirect to jobs page with job info of job_id
+  //   } catch (error) {
+  //     toast.error("Something went wrong");
+  //     console.error(error);
+  //   } finally {
+
+  //   }
+  // };
+
+  const openJob = async (job_id: any) => {
     try {
-      const response = await axios.get(`/api/jobs/job/${jobId}`);
-      router.push(`/jobs/${jobId}`); // Redirect to jobs page with job info of job_id
+      console.log("First Page: ", job_id)
+      router.push(`/jobPage/${job_id}`); // Redirect to job details page with job info of job_id
     } catch (error) {
       toast.error("Something went wrong");
       console.error(error);
-    } finally {
-
     }
   };
 
-  const handleFilterChange = (event) => {
+  const handleFilterChange = (event: any) => {
     setFilter(event.target.value);
   };
 
-  const handleSearchSubmit = async (event) => {
+  const handleSearchSubmit = async (event: any) => {
     event.preventDefault();
     try {
       setLoading(true);
@@ -88,7 +97,7 @@ export default function JobsList() {
         ) : (
           <div className="grid grid-cols-1 rounded-lg sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {jobs.map((job, index) => (
-              <Link key={index} href={job.job_apply_link} target="_blank" rel="noopener noreferrer" className="m-4 w-full">
+              <div key={index} rel="noopener noreferrer" className="m-4 w-full">
                 <div className="bg-[#95b8d1] rounded overflow-hidden shadow-lg text-gray-800">
                   {job.employer_logo && (
                     <img src={job.employer_logo} alt="Employer Logo" className="w-full h-40 object-cover rounded-t" />
@@ -97,11 +106,9 @@ export default function JobsList() {
                     <div className="font-bold text-xl mb-2">{job.employer_name}</div>
                     <p className="text-base">{job.job_title}</p>
                   </div>
-                  {/* <button>
-                    <JobDetail job={job}/>
-                  </button> */}
+                  <button onClick={() => openJob(job.job_id)}>View Details</button>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         )}
