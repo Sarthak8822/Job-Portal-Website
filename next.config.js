@@ -6,6 +6,9 @@ module.exports = {
       // your project has ESLint errors.
       ignoreDuringBuilds: true,
     },
+    images: {
+      domains: ['encrypted-tbn0.gstatic.com'],
+    },
   }
 
 module.exports = nextConfig

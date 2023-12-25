@@ -1,18 +1,26 @@
-"use client";
 // Import necessary modules
+"use client";
 import React, { useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import Navbar from "./navbar/page";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
+
+// Define the interface for job data
+interface JobData {
+  employer_logo: string;
+  employer_name: string;
+  job_title: string;
+  job_id: string; // Assuming job_id is a string, adjust it accordingly
+}
 
 export default function JobsList() {
   const router = useRouter();
-  const [jobs, setJobs] = React.useState([]);
+  const [jobs, setJobs] = React.useState<JobData[]>([]); // Specify the type of jobs array
   const [loading, setLoading] = React.useState(false);
   const [filter, setFilter] = React.useState("");
-  const [job, setJob] = React.useState();
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -32,19 +40,7 @@ export default function JobsList() {
     fetchJobs();
   }, []);
 
-  // const handleJob = async (jobId) => {
-  //   try {
-  //     const response = await axios.get(`/api/jobs/job/${jobId}`);
-  //     router.push(`/jobs/${jobId}`); // Redirect to jobs page with job info of job_id
-  //   } catch (error) {
-  //     toast.error("Something went wrong");
-  //     console.error(error);
-  //   } finally {
-
-  //   }
-  // };
-
-  const openJob = async (job_id: any) => {
+  const openJob = async (job_id: string) => {
     try {
       router.push(`/jobPage/${job_id}`); // Redirect to job details page with job info of job_id
     } catch (error) {
@@ -53,11 +49,11 @@ export default function JobsList() {
     }
   };
 
-  const handleFilterChange = (event: any) => {
+  const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFilter(event.target.value);
   };
 
-  const handleSearchSubmit = async (event: any) => {
+  const handleSearchSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       setLoading(true);
@@ -105,9 +101,12 @@ export default function JobsList() {
               <div key={index} className="m-4 w-full">
                 <div className="bg-[#95b8d1] w-64 bg-gray-500 p-6 rounded-lg shadow-md transition-transform hover:scale-105">
                   {job.employer_logo && (
-                    <img
+                    <Image
+                      loader={() => job.employer_logo}
                       src={job.employer_logo}
                       alt="Employer Logo"
+                      width={100}
+                      height={100}
                       className="w-full h-24 object-contain mb-4"
                     />
                   )}
@@ -134,17 +133,3 @@ export default function JobsList() {
     </div>
   );
 }
-
-
-
-{/* <div className="w-64 bg-gray-800 p-6 rounded-lg shadow-md transition-transform hover:scale-105">
-      <img
-        className="w-full h-24 object-contain mb-4"
-        src={jobLogo}
-        alt="Job Logo"
-      />
-      <div className="text-white">
-        <div className="text-xl font-bold mb-2">{jobTitle}</div>
-        <div className="text-gray-400">{jobCompany}</div>
-      </div>
-</div> */}
