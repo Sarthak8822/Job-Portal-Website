@@ -15,7 +15,7 @@ export default function AddJob() {
     employerLogo: "",
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setJobDetails({ ...jobDetails, [name]: value });
   };
