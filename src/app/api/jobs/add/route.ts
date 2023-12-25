@@ -11,7 +11,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
       // Assuming req.body contains the job details
       const reqBody = await req.json();
       const { jobTitle, company, description, jobApplyLink, employerLogo } = reqBody;
-      console.log(reqBody)
       
       const newJob = new Job({
         jobTitle,
@@ -22,7 +21,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
       });
 
       const savedJob = await newJob.save()
-      console.log(savedJob)
 
       return NextResponse.json({
           message: "Job created successfully",

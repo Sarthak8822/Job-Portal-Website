@@ -25,7 +25,6 @@ export default function AddJob() {
       // Perform any necessary form validation here
 
       // Send a POST request to the server to add the job
-      console.log("JOBDETAILS", jobDetails);
       await axios.post('/api/jobs/add', jobDetails);
 
       // Redirect to the jobs listing page after successful job addition

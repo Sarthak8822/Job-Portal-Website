@@ -18,10 +18,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
 
     const { searchParams } = new URL(request.url)
 
-    console.log("searchParams", searchParams)
     const query = searchParams.get('job_id')
-
-    console.log("query:  ", query)
 
     // Extract the search query from the URL
 
@@ -31,9 +28,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
 
     // Fetch data from the external API
     const res = await fetch(apiRequestUrl, options);
-    console.log("Res Response: ", res)
     const result = await res.json();
-    console.log("Res Result: ", result)
 
     // Return the result to the client
     return NextResponse.json({
