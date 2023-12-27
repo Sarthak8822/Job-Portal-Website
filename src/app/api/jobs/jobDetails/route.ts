@@ -6,8 +6,8 @@ const url = 'https://jsearch.p.rapidapi.com/job-details';
 const options = {
   method: 'GET',
   headers: {
-    'X-RapidAPI-Key': process.env.RAPIDAPI_KEY,
-    'X-RapidAPI-Host': process.env.RAPIDAPI_HOST
+    'X-RapidAPI-Key': process.env.RAPIDAPI_KEY || '',
+    'X-RapidAPI-Host': process.env.RAPIDAPI_HOST || ''
   }
 };
 
@@ -28,6 +28,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
 
     // Fetch data from the external API
     const res = await fetch(apiRequestUrl, options);
+    
     const result = await res.json();
 
     // Return the result to the client

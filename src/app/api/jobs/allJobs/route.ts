@@ -4,8 +4,8 @@ const url = `${process.env.API_URL}?query=Software%20developer&page=1&num_pages=
 const options = {
   method: 'GET',
   headers: {
-    'X-RapidAPI-Key': process.env.RAPIDAPI_KEY,
-    'X-RapidAPI-Host': process.env.RAPIDAPI_HOST
+    'X-RapidAPI-Key': process.env.RAPIDAPI_KEY || '',
+    'X-RapidAPI-Host': process.env.RAPIDAPI_HOST || ''
   }
 };
 const url1 = 'https://jooble.org/api/';
