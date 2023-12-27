@@ -28,6 +28,7 @@ export default function JobsList() {
         setLoading(true);
         const result = await axios.get("/api/jobs/allJobs");
         const jobsData = result.data.result.data;
+        console.log("Jobs Data: ");
         setJobs(jobsData);
       } catch (error) {
         toast.error("Something went wrong");
@@ -53,7 +54,9 @@ export default function JobsList() {
     setFilter(event.target.value);
   };
 
-  const handleSearchSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSearchSubmit = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
     event.preventDefault();
     try {
       setLoading(true);
@@ -99,7 +102,7 @@ export default function JobsList() {
           <div className="grid grid-cols-1 rounded-lg sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {jobs.map((job, index) => (
               <div key={index} className="m-4 w-full">
-                <div className="bg-[#95b8d1] w-64 bg-gray-500 p-6 rounded-lg shadow-md transition-transform hover:scale-105">
+                <div className="bg-gray-400 hover:bg-gray-600 transition duration-300 ease-in-out rounded-lg overflow-hidden shadow-lg">
                   {job.employer_logo && (
                     <Image
                       loader={() => job.employer_logo}
@@ -107,14 +110,14 @@ export default function JobsList() {
                       alt="Employer Logo"
                       width={100}
                       height={100}
-                      className="w-full h-24 object-contain mb-4"
+                      className="object-contain w-full h-32 md:h-48"
                     />
                   )}
                   <div className="px-6 py-4 flex-grow">
-                    <div className="font-bold text-xl mb-2">
+                    <div className="font-bold text-xl mb-2 text-white">
                       {job.employer_name}
                     </div>
-                    <p className="text-base">{job.job_title}</p>
+                    <p className="text-base text-gray-300">{job.job_title}</p>
                   </div>
                   <div className="p-4 flex justify-center">
                     <button

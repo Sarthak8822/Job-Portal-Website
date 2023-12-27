@@ -51,61 +51,56 @@ export default function JobPage({ params }: any) {
   }, [params.jobId]);
 
   return (
-    <div className="min-h-screen flex flex-col items-center">
+    <div className="min-h-screen bg-gray-900 text-white">
       <Navbar />
       {loading ? (
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center h-screen">
           <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-purple-500"></div>
         </div>
       ) : (
-        <div className="container mx-auto p-4 text-center flex flex-col items-center">
-          <div className="text-2xl mb-5">Job Details</div>
+        <div className="container mx-auto p-4 text-center">
+          <div className="text-3xl mb-5 text-yellow-400 font-bold">Exciting Job Opportunity</div>
           {jobData && (
             <>
-              <h1 className="text-5xl font-bold mb-10">
-                {jobData.employer_name}
-              </h1>
-              <div className="mb-10 mx-auto flex flex-col items-center">
+              <h1 className="text-5xl font-bold mb-10 text-blue-500">{jobData.employer_name}</h1>
+              {jobData.employer_logo && <div className="mb-10 mx-auto flex flex-col items-center">
                 <Image
                   loader={() => jobData.employer_logo}
                   src={jobData.employer_logo}
                   alt={jobData.employer_name}
-                  width={100}
-                  height={100}
-                  className="mx-auto mb-2"
+                  width={400}
+                  height={400}
+                  className="mx-auto mb-2 rounded-full bg-gray-100 shadow-lg"
                 />
                 <span className="text-4xl ml-2 block">{jobData.job_title}</span>
-              </div>
+              </div>}
               <p className="mb-10 text-justify">{jobData.job_description}</p>
               {jobData.job_highlights.Qualifications && (
                 <div className="mx-auto mb-10 flex flex-col items-center">
-                  <h1 className="text-2xl mb-10">Qualifications:</h1>
-                  <ul className="text-justify mb-10 list-disc mx-auto">
-                    {jobData.job_highlights.Qualifications.map(
-                      (qualification: any, index: any) => (
-                        <li className="mb-5" key={index}>
-                          <span>{qualification}</span>
-                        </li>
-                      )
-                    )}
+                  <h1 className="text-2xl mb-5 text-yellow-400">Qualifications:</h1>
+                  <ul className="text-justify mb-5 list-disc mx-auto">
+                    {jobData.job_highlights.Qualifications.map((qualification: any, index: any) => (
+                      <li className="mb-3" key={index}>
+                        <span>{qualification}</span>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               )}
 
-              <div className="mb-10 mx-auto">
-                <strong>Location:</strong>
-                {jobData.job_country}
+              <div className="mb-5 mx-auto">
+                <strong className="text-yellow-400">Location:</strong> {jobData.job_country}
+              </div>
+              <div className="mb-5 mx-auto">
+                <strong className="text-yellow-400">Employment Type:</strong> {jobData.job_employment_type}
               </div>
               <div className="mb-10 mx-auto">
-                <strong>Employment Type:</strong> {jobData.job_employment_type}
-              </div>
-              <div className="mb-10 mx-auto">
-                <strong>Apply Link:</strong>{" "}
+                <strong className="text-yellow-400">Apply Now:</strong>{" "}
                 <a
                   href={jobData.job_apply_link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-500"
+                  className="text-blue-500 hover:underline"
                 >
                   Apply Now
                 </a>
