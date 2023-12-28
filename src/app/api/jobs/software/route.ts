@@ -15,15 +15,18 @@ const options = {
 export async function GET(request: NextRequest, response: NextResponse) {
   try {
     // Convert NextURL to string URL
+    const { searchParams } = new URL(request.url);
+    const query = searchParams.get('search');
 
-    const { searchParams } = new URL(request.url)
-    const query = searchParams.get('search')
-
-    // Extract the search query from the URL
+    if (!query) {
+      // Handle the case when the search query is not provided
+      return NextResponse.json({
+        message: 'Search query is missing',
+      });
+    }
 
     // Construct the API request URL with the search query
     const apiRequestUrl = `${url}?query=${encodeURIComponent(`${query}`)}&page=1&num_pages=10`;
-    
 
     // Fetch data from the external API
     const res = await fetch(apiRequestUrl, options);
