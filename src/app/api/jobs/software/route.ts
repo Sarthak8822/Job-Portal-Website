@@ -23,7 +23,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
 
     // Construct the API request URL with the search query
     const apiRequestUrl = `${url}?query=${encodeURIComponent(`${query}`)}&page=1&num_pages=10`;
-
+    
 
     // Fetch data from the external API
     const res = await fetch(apiRequestUrl, options);

@@ -2,7 +2,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 // Define API request configuration
-const url = 'https://jsearch.p.rapidapi.com/job-details';
+const url = process.env.JOBDETAILS_API_URL;
 const options = {
   method: 'GET',
   headers: {
