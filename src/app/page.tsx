@@ -102,7 +102,7 @@ export default function JobsList() {
           <div className="grid grid-cols-1 rounded-lg sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {jobs.map((job, index) => (
               <div key={index} className="m-4 w-full">
-                <div className="bg-gray-400 hover:bg-gray-600 transition duration-300 ease-in-out rounded-lg overflow-hidden shadow-lg">
+                <div className="bg-gray-600 hover:bg-gray-800 transition duration-300 ease-in-out rounded-lg overflow-hidden shadow-lg">
                   {job.employer_logo && (
                     <Image
                       loader={() => job.employer_logo}
